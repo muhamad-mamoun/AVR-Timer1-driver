@@ -109,7 +109,7 @@ void TIMER1_PWM_init(const TIMER1_PWM_configurationsType* a_ptr2configurations)
 {
 	/* Calculate the required PWM frequency and duty-cycle based on the configurations. */
 	uint16 OCR1A_value = (F_CPU/(a_ptr2configurations->frequency*a_ptr2configurations->prescaler_divider))-1;
-	uint16 OCR1B_value = (uint16)((uint32)a_ptr2configurations->duty_cycle*655.35);
+	uint16 OCR1B_value = (uint16)((uint32)a_ptr2configurations->duty_cycle*(OCR1A_value/100.00));
 
 	TIMER1_Deinit();                   /* De-Initialize Timer1 to reset the previous configurations. */
 	TCCR1A = (TCCR1A & 0X3F)|((a_ptr2configurations->OC1A_output_mode)<<6);        /* Set OC1A mode. */
